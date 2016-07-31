@@ -1,0 +1,6 @@
+.idea
+.idea/*
+.git
+UptimeRobot-Java.iml
+target/*
+target
