@@ -9,7 +9,7 @@ Implementation
 
 | Method | Implemented |
 |--------|-------------|
-| getAccountDetails | No |
+| getAccountDetails | Yes |
 | getMonitors | No |
 | newMonitor | No |
 | editMonitor | No |
