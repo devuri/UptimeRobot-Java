@@ -27,7 +27,7 @@ public class UptimeRobot {
         HttpResponse<JsonNode> accountDetailsJson = Unirest.post(API_URL + "getAccountDetails").queryString("apiKey", API_KEY).queryString("format", "json").queryString("noJsonCallback", 1).asJson();
         JSONObject jsonObject = accountDetailsJson.getBody().getObject();
         if (accountDetailsJson.getBody().getObject().getString("stat").equalsIgnoreCase("ok")) {
-            return GSON.fromJson(jsonObject.toString(), AccountDetails.class);
+            return GSON.fromJson(jsonObject.getJSONObject("account").toString(), AccountDetails.class);
         } else {
             throw new ApiException("API returned fail, id " + jsonObject.getString("id") + ", message " + jsonObject.getString("message"));
         }

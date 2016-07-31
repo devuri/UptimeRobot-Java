@@ -8,28 +8,17 @@ import lombok.Getter;
  */
 public class AccountDetails {
 
-    @Getter
-    private String stat;
-    @Getter
-    private account account;
 
-    public AccountDetails(String stat, AccountDetails.account account) {
-        this.stat = stat;
-        this.account = account;
-    }
-
-    public class account {
-        @Getter
-        private String monitorLimit;
-        @Getter
-        private String monitorInterval;
-        @Getter
-        private String upMonitors;
-        @Getter
-        private String downMonitors;
-        @Getter
-        private String pausedMonitors;
-    }
+    @Getter
+    private String monitorLimit;
+    @Getter
+    private String monitorInterval;
+    @Getter
+    private String upMonitors;
+    @Getter
+    private String downMonitors;
+    @Getter
+    private String pausedMonitors;
 
 }
 
