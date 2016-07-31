@@ -33,7 +33,7 @@ public class GetAccountDetailsRequest {
             return this;
         }
 
-        public AccountDetails build() throws ApiException, UnirestException {
+        public AccountDetails get() throws ApiException, UnirestException {
             HttpResponse<JsonNode> accountDetailsJson = Unirest.post(API_URL + "getAccountDetails").queryString("apiKey", uptimeRobot.getAPI_KEY()).queryString("format", "json").queryString("noJsonCallback", 1).asJson();
             JSONObject jsonObject = accountDetailsJson.getBody().getObject();
             if (accountDetailsJson.getBody().getObject().getString("stat").equalsIgnoreCase("ok")) {
