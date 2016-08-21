@@ -8,17 +8,36 @@ import lombok.Getter;
  */
 public class AccountDetails {
 
+    private Integer id;
+    private String email;
+    private String monitor_limit;
+    private String monitor_interval;
+    private String up_monitors;
+    private String down_monitors;
+    private String paused_monitors;
 
-    @Getter
-    private String monitorLimit;
-    @Getter
-    private String monitorInterval;
-    @Getter
-    private String upMonitors;
-    @Getter
-    private String downMonitors;
-    @Getter
-    private String pausedMonitors;
+    public String getEmail() {
+        return email;
+    }
 
+    public String getMonitorLimit() {
+        return monitor_limit;
+    }
+
+    public String getMonitorInterval() {
+        return monitor_interval;
+    }
+
+    public String getUpMonitors() {
+        return up_monitors;
+    }
+
+    public String getDownMonitors() {
+        return down_monitors;
+    }
+
+    public String getPausedMonitors() {
+        return paused_monitors;
+    }
 }
 

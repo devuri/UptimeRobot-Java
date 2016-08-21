@@ -1,3 +1,5 @@
+### *Notice: This library uses the [v2 version](https://uptimerobot.com/apiv2) of the UptimeRobot API which isn't fully released yet and may contain bugs! *
+
 # UptimeRobot-Java
 
 
@@ -15,7 +17,13 @@ Work in progress.
 | resetMonitor | No |
 | getAlertContacts | No |
 | newAlertContact | No |
+| editAlertContact | No |
 | deleteAlertContact | No |
+| getMWindows | No |
+| newMWindow | No |
+| editMWindow | No |
+| deleteMWindow | No |
+
 
 # Usage
 
@@ -46,6 +54,10 @@ Monitors monitors = GetMonitorsRequest.builder().setUptimeRobot(uptimeRobot).get
                 System.out.println(monitor.getFriendlyName());
             }
 ```
+
+Possible optionals:
+
+
 
 # Credits/Mentions
 

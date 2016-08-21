@@ -16,7 +16,7 @@ import org.json.JSONObject;
  */
 public class UptimeRobot {
 
-    public static final String API_URL = "https://api.uptimerobot.com/";
+    public static final String API_URL = "https://api.uptimerobot.com/v2/";
     public static final Gson GSON = new Gson();
     @Getter
     public String API_KEY;
@@ -24,7 +24,5 @@ public class UptimeRobot {
     public UptimeRobot(String apiKey) {
         API_KEY = apiKey;
     }
-
-
 
 }

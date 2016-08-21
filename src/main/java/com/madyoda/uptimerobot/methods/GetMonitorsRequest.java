@@ -31,7 +31,12 @@ public class GetMonitorsRequest {
         private String types = "";
         private String statuses = "";
         private String customUptimeRatio = "";
+        private String customUptimeRanges = "";
+        private Boolean allTimeUptimeRatio = false;
+        private Boolean allTimeUptimeDurations = false;
         private Boolean logs = false;
+        private String logsStartDate = "";
+        private String logsEndDate = "";
         private String logsLimit = "";
         private Boolean responseTimes = false;
         private String responseTimesLimit = "";
@@ -39,7 +44,7 @@ public class GetMonitorsRequest {
         private String responseTimesStartDate = "";
         private String responseTimesEndDate = "";
         private Boolean alertContacts = false;
-        private Boolean showMonitorAlertContacts = false;
+        private String maintenanceWindows = "";
         private Boolean showTimezone = false;
         private String search = "";
 
@@ -69,8 +74,33 @@ public class GetMonitorsRequest {
             return this;
         }
 
+        public GetMonitorsRequestBuilder setCustomUptimeRanges(String customUptimeRanges) {
+            this.customUptimeRanges = customUptimeRanges;
+            return this;
+        }
+
+        public GetMonitorsRequestBuilder setAllTimeUptimeRatio(Boolean allTimeUptimeRatio) {
+            this.allTimeUptimeRatio = allTimeUptimeRatio;
+            return this;
+        }
+
+        public GetMonitorsRequestBuilder setAllTimeUptimeDurations(Boolean allTimeUptimeDurations) {
+            this.allTimeUptimeDurations = allTimeUptimeDurations;
+            return this;
+        }
+
         public GetMonitorsRequestBuilder setLogs(Boolean logs) {
             this.logs = logs;
+            return this;
+        }
+
+        public GetMonitorsRequestBuilder setLogsStartDate(String logsStartDate) {
+            this.logsStartDate = logsStartDate;
+            return this;
+        }
+
+        public GetMonitorsRequestBuilder setLogsEndDate(String logsEndDate) {
+            this.logsEndDate = logsEndDate;
             return this;
         }
 
@@ -109,8 +139,8 @@ public class GetMonitorsRequest {
             return this;
         }
 
-        public GetMonitorsRequestBuilder setShowMonitorAlertContacts(Boolean showMonitorAlertContacts) {
-            this.showMonitorAlertContacts = showMonitorAlertContacts;
+        public GetMonitorsRequestBuilder setMaintenanceWindows(String maintenanceWindows) {
+            this.maintenanceWindows = maintenanceWindows;
             return this;
         }
 
@@ -125,32 +155,38 @@ public class GetMonitorsRequest {
         }
 
         public Monitors get() throws ApiException, UnirestException {
-            HttpResponse<JsonNode> accountDetailsJson = Unirest.post(API_URL + "getMonitors")
+            HttpResponse<JsonNode> accountMonitorsJson = Unirest.post(API_URL + "getMonitors")
                     /*
                     This is based off the fact Unirest treats an empty string ("") as nothing and doesn't put it as a query.
                      */
-                    .queryString("apiKey", uptimeRobot.getAPI_KEY())
                     .queryString("format", "json")
                     .queryString("noJsonCallback", 1)
                     .queryString("monitors", monitors)
                     .queryString("types", types)
                     .queryString("statuses", statuses)
-                    .queryString("customUptimeRatio", customUptimeRatio)
+                    .queryString("custom_uptime_ratios", customUptimeRatio)
+                    .queryString("custom_uptime_ranges", customUptimeRanges)
+                    .queryString("all_time_uptime_ratio", allTimeUptimeRatio ? "1" : "0")
+                    .queryString("all_time_uptime_durations", allTimeUptimeDurations ? "1" : "0")
                     .queryString("logs", logs ? "1" : "0")
-                    .queryString("logsLimit", logsLimit)
-                    .queryString("responseTimes", responseTimes ? "1" : "0")
-                    .queryString("responseTimesLimit", responseTimesLimit)
-                    .queryString("responseTimesAverage", responseTimesAverage)
-                    .queryString("responseTimesStartDate", responseTimesStartDate)
-                    .queryString("responseTimesEndDate", responseTimesEndDate)
-                    .queryString("alertContacts", alertContacts ? "1" : "0")
-                    .queryString("showMonitorAlertContacts", showMonitorAlertContacts ? "1" : "0")
+                    .queryString("logs_start_date", logsStartDate)
+                    .queryString("logs_end_date", logsEndDate)
+                    .queryString("logs_limit", logsLimit)
+                    .queryString("response_times", responseTimes ? "1" : "0")
+                    .queryString("response_times_limit", responseTimesLimit)
+                    .queryString("response_times_average", responseTimesAverage)
+                    .queryString("response_times_start_date", responseTimesStartDate)
+                    .queryString("response_times_end_date", responseTimesEndDate)
+                    .queryString("alert_contacts", alertContacts ? "1" : "0")
+                    .queryString("mwindows", maintenanceWindows)
                     .queryString("showTimezone", showTimezone ? "1" : "0")
                     .queryString("search", search)
+                    .field("api_key", uptimeRobot.getAPI_KEY())
                     .asJson();
-            JSONObject jsonObject = accountDetailsJson.getBody().getObject();
-            if (accountDetailsJson.getBody().getObject().getString("stat").equalsIgnoreCase("ok")) {
-                return GSON.fromJson(jsonObject.getJSONObject("monitors").toString(), Monitors.class);
+            JSONObject jsonObject = accountMonitorsJson.getBody().getObject();
+            if (accountMonitorsJson.getBody().getObject().getString("stat").equalsIgnoreCase("ok")) {
+                System.out.println(jsonObject.toString());
+                return GSON.fromJson(jsonObject.toString(), Monitors.class);
             } else {
                 throw new ApiException("API returned fail, id " + jsonObject.getString("id") + ", message " + jsonObject.getString("message"));
             }

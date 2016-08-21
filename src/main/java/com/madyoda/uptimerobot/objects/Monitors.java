@@ -14,102 +14,99 @@ import java.util.List;
  */
 public class Monitors {
 
-    private List<Monitor> monitor;
+    private List<Monitor> monitors;
 
     public List<Monitor> getMonitors() {
-        return monitor;
+        return monitors;
     }
 
 
     public class Monitor {
         private String id;
-        private String friendlyname;
+        private String friendly_name;
         private String url;
-        private String type;
-        private String subtype;
-        private String keywordtype;
-        private String keyboardvalue;
-        private String httpusername;
-        private String httppassword;
+        private Integer type;
+        private String sub_type;
+        private String keyword_type;
+        private String keyword_value;
+        private String http_username;
+        private String http_password;
         private String port;
-        private String interval;
-        private String status;
-        private String alltimeuptimeratio;
-        private String customtimeuptimeratio;
-        private List<AlertContact> alertcontact;
-        private List<Log> log;
-        private List<ResponseTime> responsetime;
+        private Integer interval;
+        private Integer status;
+        private Integer create_datetime;
+        private String alltime_uptime_ratio; // TODO: Check name (undocumented)
+        private String customtime_uptime_ratio; // TODO: Check name (undocumented)
+        private List<Log> logs;
 
         public String getId() {
             return id;
         }
 
         public String getFriendlyName() {
-            return friendlyname;
+            return friendly_name;
         }
 
         public String getUrl() {
             return url;
         }
 
-        public String getType() {
+        public Integer getType() {
             return type;
         }
 
-        public String getSubtype() {
-            return subtype;
+        public String getSubType() {
+            return sub_type;
         }
 
         public String getKeywordType() {
-            return keywordtype;
+            return keyword_type;
         }
 
-        public String getKeyboardValue() {
-            return keyboardvalue;
+        public String getKeywordValue() {
+            return keyword_value;
         }
 
         public String getHttpUsername() {
-            return httpusername;
+            return http_username;
         }
 
         public String getHttpPassword() {
-            return httppassword;
+            return http_password;
         }
 
         public String getPort() {
             return port;
         }
 
-        public String getInterval() {
+        public Integer getInterval() {
             return interval;
         }
 
-        public String getStatus() {
+        public Integer getStatus() {
             return status;
         }
 
+        public Integer getCreateDateTime() {
+            return create_datetime;
+        }
+
         public String getAllTimeUptimeRatio() {
-            return alltimeuptimeratio;
+            return alltime_uptime_ratio;
         }
 
         public String getCustomTimeUptimeRatio() {
-            return customtimeuptimeratio;
-        }
-
-        public List<AlertContact> getAlertContacts() {
-            return alertcontact;
+            return customtime_uptime_ratio;
         }
 
         public List<Log> getLogs() {
-            return log;
+            return logs;
         }
 
-        public List<ResponseTime> getResponseTimes() {
-            return responsetime;
-        }
     }
 
     public class AlertContact {
+        // TODO: Do we need?
         private String id;
         private String type;
         private String value;
@@ -138,47 +135,20 @@ public class Monitors {
     }
 
     public class Log {
-        private String type;
-        private String datetime;
-        private List<AlertContact> alertcontact;
+        private Integer type;
+        private Integer datetime;
+        private Integer duration;
 
-        public String getType() {
+        public Integer getType() {
             return type;
         }
 
-        public Date getDatetime() {
-            try {
-                return new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").parse(datetime);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        public String getDatetimeString(){
-            return datetime;
-        }
-    }
-
-    public class ResponseTime {
-        private String datetime;
-        private String value;
-
-        public Date getDatetime() {
-            try {
-                return new SimpleDateFormat("dd/MM/yyyy hh:mm:ss").parse(datetime);
-            } catch (ParseException e) {
-                e.printStackTrace();
-                return null;
-            }
-        }
-
-        public String getDatetimeString(){
+        public Integer getDateTime() {
             return datetime;
         }
 
-        public String getValue() {
-            return value;
+        public Integer getDuration() {
+            return duration;
         }
     }
 
