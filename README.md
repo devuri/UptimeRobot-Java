@@ -5,6 +5,18 @@
 
 Work in progress.
 
+# Maven  
+
+UptimeRobot-Java is available on maven central:  
+
+```
+<dependency>
+  <groupId>com.madyoda</groupId>
+  <artifactId>uptimerobot</artifactId>
+  <version>0.1</version>
+</dependency>
+```
+
 # Implementation
 
 | Method | Implemented |
